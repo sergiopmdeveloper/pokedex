@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Pokemon from './components/Pokemon'
 import usePokemons from './hooks/usePokemons'
 
@@ -6,11 +7,40 @@ import usePokemons from './hooks/usePokemons'
  * @returns The main application component.
  */
 export default function App() {
-  const pokemons = usePokemons(0)
+  const [offset, setOffset] = useState(0)
+  const { pokemons, previous, next } = usePokemons(offset)
+
+  /**
+   * Decreases the offset by 100
+   * if there is a previous value.
+   */
+  const handlePrevious = () => {
+    if (previous) {
+      setOffset(offset - 100)
+    }
+  }
+
+  /**
+   * Increases the offset by 100
+   * if there is a next value.
+   */
+  const handleNext = () => {
+    if (next) {
+      setOffset(offset + 100)
+    }
+  }
 
   if (pokemons.length > 0) {
-    return pokemons.map(pokemon => (
-      <Pokemon name={pokemon.name} url={pokemon.url} key={pokemon.name} />
-    ))
+    return (
+      <>
+        {pokemons.map(pokemon => (
+          <Pokemon name={pokemon.name} url={pokemon.url} key={pokemon.name} />
+        ))}
+        <div className="flex gap-2">
+          <button onClick={handlePrevious}>Previous</button>
+          <button onClick={handleNext}>Next</button>
+        </div>
+      </>
+    )
   }
 }
