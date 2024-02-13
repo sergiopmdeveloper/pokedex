@@ -1,3 +1,4 @@
+import Pokemon from './components/Pokemon'
 import usePokemons from './hooks/usePokemons'
 
 /**
@@ -8,6 +9,8 @@ export default function App() {
   const pokemons = usePokemons(0)
 
   if (pokemons.length > 0) {
-    return <h1>First pókemon: {pokemons[0].name}</h1>
+    return pokemons.map(pokemon => (
+      <Pokemon name={pokemon.name} url={pokemon.url} key={pokemon.name} />
+    ))
   }
 }
