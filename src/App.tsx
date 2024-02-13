@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useState } from 'react'
 import Pokemon from './components/Pokemon'
 import usePokemons from './hooks/usePokemons'
@@ -37,8 +38,22 @@ export default function App() {
           <Pokemon name={pokemon.name} url={pokemon.url} key={pokemon.name} />
         ))}
         <div className="flex gap-2">
-          <button onClick={handlePrevious}>Previous</button>
-          <button onClick={handleNext}>Next</button>
+          <button
+            className={clsx('bg-theme-1 text-theme-3', {
+              'opacity-50': !previous,
+            })}
+            onClick={handlePrevious}
+            disabled={!previous}
+          >
+            Previous
+          </button>
+          <button
+            className={clsx('bg-theme-1 text-theme-3', { 'opacity-50': !next })}
+            onClick={handleNext}
+            disabled={!next}
+          >
+            Next
+          </button>
         </div>
       </>
     )
