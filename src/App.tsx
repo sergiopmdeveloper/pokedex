@@ -33,17 +33,19 @@ export default function App() {
 
   if (pokemons.length > 0) {
     return (
-      <>
-        {pokemons.map(pokemon => (
-          <Pokemon name={pokemon.name} url={pokemon.url} key={pokemon.name} />
-        ))}
+      <div className="mx-auto mt-5 max-w-screen-2xl px-5">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {pokemons.map(pokemon => (
+            <Pokemon name={pokemon.name} url={pokemon.url} key={pokemon.name} />
+          ))}
+        </div>
         <Pagination
           previous={previous}
           next={next}
           handlePrevious={handlePrevious}
           handleNext={handleNext}
         />
-      </>
+      </div>
     )
   }
 }

@@ -23,7 +23,7 @@ export default function Pagination({
   handleNext,
 }: PaginationProps) {
   return (
-    <div className="flex gap-2">
+    <div className="mt-5 flex gap-2">
       <PaginationButton onClick={handlePrevious} disabled={!previous}>
         Previous
       </PaginationButton>
@@ -55,7 +55,13 @@ const PaginationButton = ({
 }: PaginationButtonProps) => {
   return (
     <button
-      className={clsx('bg-theme-1 text-theme-3', { 'opacity-50': disabled })}
+      className={clsx(
+        'rounded bg-theme-1 px-3 py-1 text-theme-3',
+        !disabled && 'hover:brightness-150',
+        {
+          'opacity-50': disabled,
+        }
+      )}
       onClick={onClick}
       disabled={disabled}
     >
