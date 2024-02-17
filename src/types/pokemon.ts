@@ -11,3 +11,13 @@ export type Pokemon = {
   name: string
   url: string
 }
+
+export type PokemonDetailResponse = {
+  types: PokemonDetailType[]
+}
+
+export type PokemonDetailType = {
+  type: {
+    name: string
+  }
+}
