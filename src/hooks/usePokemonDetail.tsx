@@ -8,6 +8,7 @@ import type { PokemonDetailResponse, PokemonDetailType } from '../types/pokemon'
  */
 export default function usePokemonDetail(url: string) {
   const [pokemonTypes, setPokemonTypes] = useState<string[] | null>(null)
+  const [pokemonSprite, setPokemonSprite] = useState<string | null>(null)
 
   useEffect(() => {
     fetch(url)
@@ -16,8 +17,9 @@ export default function usePokemonDetail(url: string) {
         setPokemonTypes(
           data.types.map((type: PokemonDetailType) => type.type.name)
         )
+        setPokemonSprite(data.sprites.other['official-artwork'].front_default)
       })
   }, [url])
 
-  return { pokemonTypes }
+  return { pokemonTypes, pokemonSprite }
 }

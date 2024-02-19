@@ -14,10 +14,19 @@ export type Pokemon = {
 
 export type PokemonDetailResponse = {
   types: PokemonDetailType[]
+  sprites: PokemonDetailSprite
 }
 
 export type PokemonDetailType = {
   type: {
     name: string
+  }
+}
+
+export type PokemonDetailSprite = {
+  other: {
+    'official-artwork': {
+      front_default: string
+    }
   }
 }

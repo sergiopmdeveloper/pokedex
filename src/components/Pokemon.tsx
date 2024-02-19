@@ -13,10 +13,10 @@ type PokemonProps = Pokemon
  * @returns The rendered Pokemon component.
  */
 export default function Pokemon({ name, url }: PokemonProps) {
-  const { pokemonTypes } = usePokemonDetail(url)
+  const { pokemonTypes, pokemonSprite } = usePokemonDetail(url)
 
   return (
-    <div className="relative rounded bg-theme-1 p-4 text-lg font-medium text-theme-3">
+    <div className="relative flex flex-col gap-5 rounded bg-theme-1 p-4 text-lg font-medium text-theme-3">
       <h1>{capitalizeFirstLetter(name)}</h1>
       {pokemonTypes && (
         <div className="absolute right-2 top-2 flex gap-1 text-xs">
@@ -33,6 +33,13 @@ export default function Pokemon({ name, url }: PokemonProps) {
             </span>
           ))}
         </div>
+      )}
+      {pokemonSprite && (
+        <img
+          className="mx-auto w-2/4 sm:w-3/4"
+          src={pokemonSprite}
+          alt={`${capitalizeFirstLetter(name)} sprite`}
+        />
       )}
     </div>
   )
