@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Pagination from './components/Pagination'
 import Pokemon from './components/Pokemon'
 import usePokemons from './hooks/usePokemons'
+import Loader from './icons/Loader'
 
 /**
  * Renders the main application component.
@@ -29,6 +30,14 @@ export default function App() {
     if (next) {
       setOffset(offset + 100)
     }
+  }
+
+  if (pokemons.length === 0) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <Loader className="h-10 w-10 animate-spin stroke-theme-1" />
+      </div>
+    )
   }
 
   if (pokemons.length > 0) {
