@@ -19,7 +19,7 @@ export default function Pokemon({ name, url }: PokemonProps) {
 
   return (
     <div className="relative flex flex-col gap-5 rounded bg-theme-1 p-4 text-lg font-medium text-theme-3">
-      <h1>{capitalizeFirstLetter(name)}</h1>
+      <h1 className="mt-3 truncate text-xl">{capitalizeFirstLetter(name)}</h1>
       {!pokemonTypes || !pokemonSprite || !pokemonStats ? (
         <Loader className="h-8 w-8 animate-spin stroke-theme-3" />
       ) : (
@@ -44,7 +44,7 @@ export default function Pokemon({ name, url }: PokemonProps) {
             alt={`${capitalizeFirstLetter(name)} sprite`}
           />
           <div className="flex flex-col gap-1">
-            <span className="mb-2 w-fit rounded-md bg-theme-2 px-2">
+            <span className="mb-2 w-fit rounded-md bg-theme-2 px-2 text-base">
               Power {''}
               {Object.values(pokemonStats).reduce((acc, stat) => acc + stat, 0)}
             </span>
