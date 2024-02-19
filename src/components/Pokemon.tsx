@@ -2,6 +2,7 @@ import usePokemonDetail from '../hooks/usePokemonDetail'
 import { pokemonTypeColors } from '../other/constants'
 import type { Pokemon } from '../types/pokemon'
 import { capitalizeFirstLetter } from '../utils/formatting'
+import PokemonStat from './PokemonStat'
 
 type PokemonProps = Pokemon
 
@@ -13,7 +14,7 @@ type PokemonProps = Pokemon
  * @returns The rendered Pokemon component.
  */
 export default function Pokemon({ name, url }: PokemonProps) {
-  const { pokemonTypes, pokemonSprite } = usePokemonDetail(url)
+  const { pokemonTypes, pokemonSprite, pokemonStats } = usePokemonDetail(url)
 
   return (
     <div className="relative flex flex-col gap-5 rounded bg-theme-1 p-4 text-lg font-medium text-theme-3">
@@ -40,6 +41,17 @@ export default function Pokemon({ name, url }: PokemonProps) {
           src={pokemonSprite}
           alt={`${capitalizeFirstLetter(name)} sprite`}
         />
+      )}
+      {pokemonStats && (
+        <div className="flex flex-col gap-1">
+          <span className="mb-2 w-fit rounded-md bg-theme-2 px-2">
+            Power {''}
+            {Object.values(pokemonStats).reduce((acc, stat) => acc + stat, 0)}
+          </span>
+          {Object.entries(pokemonStats).map(([stat, value]) => (
+            <PokemonStat key={stat} stat={stat} value={value} />
+          ))}
+        </div>
       )}
     </div>
   )

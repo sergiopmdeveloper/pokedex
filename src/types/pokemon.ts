@@ -15,6 +15,7 @@ export type Pokemon = {
 export type PokemonDetailResponse = {
   types: PokemonDetailType[]
   sprites: PokemonDetailSprite
+  stats: PokemonDetailStat[]
 }
 
 export type PokemonDetailType = {
@@ -29,4 +30,17 @@ export type PokemonDetailSprite = {
       front_default: string
     }
   }
+}
+
+export type PokemonDetailStat = {
+  base_stat: number
+}
+
+export type PokemonStats = {
+  hp: number
+  attack: number
+  defense: number
+  specialAttack: number
+  specialDefense: number
+  speed: number
 }

@@ -18,3 +18,22 @@ export const pokemonTypeColors = {
   steel: '#b8b8d0',
   fairy: '#ee99ac',
 }
+
+type MaxStats = {
+  [key: string]: number
+  hp: number
+  attack: number
+  defense: number
+  specialAttack: number
+  specialDefense: number
+  speed: number
+}
+
+export const maxStats: MaxStats = {
+  hp: 255,
+  attack: 190,
+  defense: 250,
+  specialAttack: 194,
+  specialDefense: 250,
+  speed: 180,
+}
