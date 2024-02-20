@@ -6,3 +6,6 @@ dist
 
 # Development container
 .devcontainer
+
+# VSCode configuration
+.vscode
