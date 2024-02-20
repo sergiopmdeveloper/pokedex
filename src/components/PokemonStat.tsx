@@ -1,4 +1,5 @@
 import { maxStats } from '../other/constants'
+import { splitWordsByCapitalLetter } from '../utils/formatting'
 
 type PokemonStatProps = {
   stat: string
@@ -16,7 +17,9 @@ export default function PokemonStat({ stat, value }: PokemonStatProps) {
   return (
     <div className="relative flex h-6 items-center justify-between bg-theme-2">
       <span className="z-10 pl-2 text-sm text-theme-3">{value}</span>
-      <span className="z-10 pr-2 text-sm text-theme-3">{stat}</span>
+      <span className="z-10 pr-2 text-sm text-theme-3">
+        {splitWordsByCapitalLetter(stat)}
+      </span>
       <div
         className="absolute h-full bg-green-500"
         style={{ width: `${(value / maxStats[stat]) * 100}%` }}
