@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Pagination from './components/Pagination'
 import Pokemon from './components/Pokemon'
 import usePokemons from './hooks/usePokemons'
@@ -10,7 +10,9 @@ import Loader from './icons/Loader'
  */
 export default function App() {
   const [offset, setOffset] = useState(0)
-  const { pokemons, previous, next } = usePokemons(offset)
+  const [name, setName] = useState<string | null>(null)
+  const nameRef = useRef<HTMLInputElement>(null)
+  const { pokemons, previous, next } = usePokemons(offset, name)
 
   /**
    * Decreases the offset by 100
@@ -32,29 +34,61 @@ export default function App() {
     }
   }
 
-  if (pokemons.length === 0) {
-    return (
-      <div className="flex h-screen w-screen items-center justify-center">
-        <Loader className="h-10 w-10 animate-spin stroke-theme-1" />
-      </div>
-    )
-  }
-
-  if (pokemons.length > 0) {
-    return (
+  return (
+    <>
       <div className="mx-auto mt-5 max-w-screen-2xl px-5">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {pokemons.map(pokemon => (
-            <Pokemon name={pokemon.name} url={pokemon.url} key={pokemon.name} />
-          ))}
+        <div className="mb-5">
+          <form className="flex gap-2">
+            <input
+              className="rounded-md bg-theme-3 px-2 py-1"
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Name..."
+              ref={nameRef}
+            />
+            <button
+              className="rounded-md bg-theme-1 px-2 text-theme-3 hover:brightness-150"
+              type="submit"
+              onClick={event => {
+                event.preventDefault()
+                setName(nameRef.current?.value ?? null)
+              }}
+            >
+              Search
+            </button>
+          </form>
         </div>
-        <Pagination
-          previous={previous}
-          next={next}
-          handlePrevious={handlePrevious}
-          handleNext={handleNext}
-        />
+        {!pokemons && (
+          <div className="flex w-full justify-center">
+            <Loader className="h-10 w-10 animate-spin stroke-theme-1" />
+          </div>
+        )}
+        {pokemons?.length === 0 && (
+          <div className="flex w-full justify-center">
+            <p className="text-theme-1">No Pokémons found</p>
+          </div>
+        )}
+        {(pokemons?.length ?? 0) > 0 && (
+          <>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {pokemons?.map(pokemon => (
+                <Pokemon
+                  name={pokemon.name}
+                  url={pokemon.url}
+                  key={pokemon.name}
+                />
+              ))}
+            </div>
+            <Pagination
+              previous={previous}
+              next={next}
+              handlePrevious={handlePrevious}
+              handleNext={handleNext}
+            />
+          </>
+        )}
       </div>
-    )
-  }
+    </>
+  )
 }
