@@ -40,15 +40,16 @@ export default function App() {
         <div className="mb-5">
           <form className="flex gap-2">
             <input
-              className="rounded-md bg-theme-3 px-2 py-1"
+              className="w-36 rounded-md bg-theme-3 px-2 py-1 text-sm sm:w-auto sm:text-base"
               type="text"
               name="name"
               id="name"
+              autoComplete="off"
               placeholder="Name..."
               ref={nameRef}
             />
             <button
-              className="rounded-md bg-theme-1 px-2 text-theme-3 hover:brightness-150"
+              className="rounded-md bg-theme-1 px-2 text-sm text-theme-3 hover:brightness-150 sm:text-base"
               type="submit"
               onClick={event => {
                 event.preventDefault()
